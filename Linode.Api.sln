@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linode.Api", "Linode.Api\Linode.Api.csproj", "{F8AB7275-1012-4F98-8AAF-5EB734E81541}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Linode.Api", "Linode.Api\Linode.Api.csproj", "{F8AB7275-1012-4F98-8AAF-5EB734E81541}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución", "Elementos de la solución", "{7D518C78-79AB-4585-9D99-3EE91FA83CEA}"
+	ProjectSection(SolutionItems) = preProject
+		..\CHANGELOG = ..\CHANGELOG
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
