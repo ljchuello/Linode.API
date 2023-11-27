@@ -20,12 +20,6 @@ namespace Test
                 LinodeClient linodeClient = new LinodeClient("apikey");
                 linodeClient = new LinodeClient(await File.ReadAllTextAsync("D:\\Linode.Api.txt"));
 
-                List<Image> list = await linodeClient.Image.Get();
-
-                Image image = await linodeClient.Image.Get("linode/almalinux8");
-
-                string json = JsonConvert.SerializeObject(image, Formatting.Indented);
-
             }
             catch (Exception ex)
             {

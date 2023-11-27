@@ -15,6 +15,10 @@ namespace Linode.Api.Client
             _token = token;
         }
 
+        /// <summary>
+        /// Returns a paginated list of Images.
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<Image>> Get()
         {
             List<Image> list = new List<Image>();
@@ -42,6 +46,11 @@ namespace Linode.Api.Client
             }
         }
 
+        /// <summary>
+        /// Get information about a single Image.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<Image> Get(string id)
         {
             // Get list

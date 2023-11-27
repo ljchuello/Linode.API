@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Net;
 using System.Threading.Tasks;
+using System.Net.Http.Headers;
 
 namespace Linode.Api
 {
@@ -47,6 +48,35 @@ namespace Linode.Api
                     //    // If it's a genuine error
                     //    throw new Exception($"{error.Code} - {error.Message}");
                     //}
+                    break;
+            }
+
+            return json;
+        }
+
+        public static async Task<string> SendPostRequest(string token, string url, string content)
+        {
+            HttpResponseMessage httpResponseMessage;
+            using (HttpClient httpClient = new HttpClient())
+            {
+                using (HttpRequestMessage httpRequestMessage = new HttpRequestMessage(new HttpMethod("POST"), $"{ApiServer}{url}"))
+                {
+                    httpRequestMessage.Headers.TryAddWithoutValidation("Authorization", $"Bearer {token}");
+                    httpRequestMessage.Content = new StringContent(content);
+                    httpRequestMessage.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                    httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
+                }
+            }
+
+            // Response
+            string json = await httpResponseMessage.Content.ReadAsStringAsync();
+
+            switch (httpResponseMessage.StatusCode)
+            {
+                case HttpStatusCode.Created:
+                    break;
+
+                default:
                     break;
             }
 
