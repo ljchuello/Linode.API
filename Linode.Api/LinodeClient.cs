@@ -10,10 +10,12 @@ namespace Linode.Api
         {
             Token = token;
 
+            Image = new ImageClient(token);
             LinodeType = new LinodeTypeClient(token);
             Region = new RegionClient(token);
         }
 
+        public ImageClient Image { get; private set; }
         public LinodeTypeClient LinodeType { get; private set; }
         public RegionClient Region { get; private set; }
     }

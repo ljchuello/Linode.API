@@ -1,4 +1,5 @@
 ﻿using Linode.Api;
+using Linode.Api.Objets.Image;
 using Linode.Api.Objets.LinodeType;
 using Linode.Api.Objets.Region;
 using Newtonsoft.Json;
@@ -19,11 +20,11 @@ namespace Test
                 LinodeClient linodeClient = new LinodeClient("apikey");
                 linodeClient = new LinodeClient(await File.ReadAllTextAsync("D:\\Linode.Api.txt"));
 
-                List<LinodeType> list = await linodeClient.LinodeType.Get();
+                List<Image> list = await linodeClient.Image.Get();
 
-                LinodeType linodeType = await linodeClient.LinodeType.Get("g7-highmem-2");
+                Image image = await linodeClient.Image.Get("linode/almalinux8");
 
-                string json = JsonConvert.SerializeObject(linodeType, Formatting.Indented);
+                string json = JsonConvert.SerializeObject(image, Formatting.Indented);
 
             }
             catch (Exception ex)
