@@ -10,9 +10,11 @@ namespace Linode.Api
         {
             Token = token;
 
+            LinodeType = new LinodeTypeClient(token);
             Region = new RegionClient(token);
         }
 
+        public LinodeTypeClient LinodeType { get; private set; }
         public RegionClient Region { get; private set; }
     }
 }
