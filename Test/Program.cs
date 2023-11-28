@@ -1,8 +1,5 @@
 ﻿using Linode.Api;
-using Linode.Api.Objets.Image;
-using Linode.Api.Objets.LinodeType;
-using Linode.Api.Objets.Region;
-using Newtonsoft.Json;
+using Linode.Api.Objets.SshKey;
 
 namespace Test
 {
@@ -19,7 +16,6 @@ namespace Test
             {
                 LinodeClient linodeClient = new LinodeClient("apikey");
                 linodeClient = new LinodeClient(await File.ReadAllTextAsync("D:\\Linode.Api.txt"));
-
             }
             catch (Exception ex)
             {
