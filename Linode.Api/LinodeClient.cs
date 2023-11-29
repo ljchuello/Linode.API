@@ -14,11 +14,13 @@ namespace Linode.Api
             LinodeType = new LinodeTypeClient(token);
             Region = new RegionClient(token);
             SshKey = new SshKeyClient(token);
+            Volume = new VolumeClient(token);
         }
 
         public ImageClient Image { get; private set; }
         public LinodeTypeClient LinodeType { get; private set; }
         public RegionClient Region { get; private set; }
         public SshKeyClient SshKey { get; private set; }
+        public VolumeClient Volume { get; private set; }
     }
 }

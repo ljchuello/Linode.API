@@ -98,11 +98,21 @@ namespace Linode.Api.Client
             return JsonConvert.DeserializeObject<SshKey>(jsonResponse) ?? new SshKey();
         }
 
+        /// <summary>
+        /// Deletes an SSH Key you have access to.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task Delete(long id)
         {
             await Core.SendDeleteRequest(_token, $"/profile/sshkeys/{id}");
         }
 
+        /// <summary>
+        /// Deletes an SSH Key you have access to.
+        /// </summary>
+        /// <param name="sshKey"></param>
+        /// <returns></returns>
         public async Task Delete(SshKey sshKey)
         {
             await Delete(sshKey.Id);
