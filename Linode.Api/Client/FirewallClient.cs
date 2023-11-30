@@ -2,7 +2,9 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Linode.Api.Enums;
 using Linode.Api.Objets.Firewall;
+using Linode.Api.Objets.SshKey;
 
 namespace Linode.Api.Client
 {
@@ -15,6 +17,10 @@ namespace Linode.Api.Client
             _token = token;
         }
 
+        /// <summary>
+        /// Returns a paginated list of accessible Firewalls.
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<Firewall>> Get()
         {
             List<Firewall> list = new List<Firewall>();
@@ -42,6 +48,11 @@ namespace Linode.Api.Client
             }
         }
 
+        /// <summary>
+        /// Get a specific Firewall resource by its ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<Firewall> Get(long id)
         {
             // Get list
@@ -52,6 +63,72 @@ namespace Linode.Api.Client
 
             // Return
             return firewall;
+        }
+
+        /// <summary>
+        /// Creates a Firewall to filter network traffic.
+        /// </summary>
+        /// <param name="firewall"></param>
+        /// <returns></returns>
+        public async Task<Firewall> Create(Firewall firewall)
+        {
+            // Preparing raw
+            string raw = JsonConvert.SerializeObject(firewall, Formatting.Indented);
+
+            // Send post
+            string jsonResponse = await Core.SendPostRequest(_token, "/networking/firewalls", raw);
+
+            // Return
+            return JsonConvert.DeserializeObject<Firewall>(jsonResponse) ?? new Firewall();
+        }
+
+        /// <summary>
+        /// Updates information for a Firewall.
+        /// </summary>
+        /// <param name="id">ID of the Firewall</param>
+        /// <param name="firewallStatus"></param>
+        /// <returns></returns>
+        public async Task<Firewall> Update(long id, eFirewallStatus firewallStatus)
+        {
+            // Preparing raw
+            string raw = $"{{ \"status\": \"{firewallStatus}\" }}";
+
+            // Send post
+            string jsonResponse = await Core.SendPutRequest(_token, $"/networking/firewalls/{id}", raw);
+
+            // Return
+            return JsonConvert.DeserializeObject<Firewall>(jsonResponse) ?? new Firewall();
+        }
+
+        /// <summary>
+        /// Updates information for a Firewall.
+        /// </summary>
+        /// <param name="firewall">Firewall</param>
+        /// <param name="firewallStatus"></param>
+        /// <returns></returns>
+        public async Task<Firewall> Update(Firewall firewall, eFirewallStatus firewallStatus)
+        {
+            return await Update(firewall.Id, firewallStatus);
+        }
+
+        /// <summary>
+        /// Delete a Firewall resource
+        /// </summary>
+        /// <param name="id">ID of the Firewall</param>
+        /// <returns></returns>
+        public async Task Delete(long id)
+        {
+            await Core.SendDeleteRequest(_token, $"/networking/firewalls/{id}");
+        }
+
+        /// <summary>
+        /// Delete a Firewall resource
+        /// </summary>
+        /// <param name="firewall">Firewall</param>
+        /// <returns></returns>
+        public async Task Delete(Firewall firewall)
+        {
+            await Delete(firewall.Id);
         }
     }
 }

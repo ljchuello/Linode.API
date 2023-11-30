@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System;
+using Linode.Api.Enums;
 
 namespace Linode.Api.Objets.Firewall
 {
@@ -34,7 +35,7 @@ namespace Linode.Api.Objets.Firewall
         /// The status of this Firewall.
         /// </summary>
         [JsonProperty("status")]
-        public string Status { get; set; } = string.Empty;
+        public eFirewallStatus Status { get; set; } = eFirewallStatus.enabled;
 
         /// <summary>
         /// An array of tags applied to this object. Tags are for organizational purposes only.
@@ -61,7 +62,7 @@ namespace Linode.Api.Objets.Firewall
         /// The default behavior for inbound traffic. This setting can be overridden by updating the inbound.action property of the Firewall Rule.
         /// </summary>
         [JsonProperty("inbound_policy")]
-        public string InboundPolicy { get; set; } = string.Empty;
+        public eFirewallRulAction InboundPolicy { get; set; } = eFirewallRulAction.DROP;
 
         /// <summary>
         /// The outbound rules for the firewall, as a JSON array.
@@ -73,7 +74,7 @@ namespace Linode.Api.Objets.Firewall
         /// The default behavior for outbound traffic. This setting can be overridden by updating the outbound.action property of the Firewall Rule.
         /// </summary>
         [JsonProperty("outbound_policy")]
-        public string OutboundPolicy { get; set; } = string.Empty;
+        public eFirewallRulAction OutboundPolicy { get; set; } = eFirewallRulAction.ACCEPT;
     }
 
     public class FirewallRule
@@ -83,7 +84,7 @@ namespace Linode.Api.Objets.Firewall
         /// Overrides the Firewall’s inbound_policy if this is an inbound rule, or the outbound_policy if this is an outbound rule.
         /// </summary>
         [JsonProperty("action")]
-        public string Action { get; set; } = string.Empty;
+        public eFirewallRulAction Action { get; set; } = eFirewallRulAction.ACCEPT ;
 
         /// <summary>
         /// The IPv4 and/or IPv6 addresses affected by this rule.
@@ -115,7 +116,7 @@ namespace Linode.Api.Objets.Firewall
         /// The type of network traffic affected by this rule.
         /// </summary>
         [JsonProperty("protocol")]
-        public string Protocol { get; set; } = string.Empty;
+        public eFirewallProtocol Protocol { get; set; } = eFirewallProtocol.TCP;
     }
 
     public class FirewallRuleAddresses
