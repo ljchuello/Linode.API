@@ -8,6 +8,7 @@
 
 |  | Get all | Get one | Create | Update | Delete | Actions |
 |--|:--:|:--:|:--:|:--:|:--:|:--:|
+| Firewalls | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 | Images | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: | :x: | :heavy_minus_sign: |
 | Linode Type | :heavy_check_mark: | :heavy_check_mark: | :heavy_minus_sign: | :heavy_minus_sign: | :heavy_minus_sign: | :heavy_minus_sign: |
 | Regions | :heavy_check_mark: | :heavy_check_mark: | :heavy_minus_sign: | :heavy_minus_sign: | :heavy_minus_sign: | :heavy_minus_sign: |
