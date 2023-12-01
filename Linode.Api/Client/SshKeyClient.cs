@@ -74,7 +74,7 @@ namespace Linode.Api.Client
             // Preparing raw
             string raw = $"{{ \"label\": \"{label}\", \"ssh_key\": \"{sshKey}\" }}";
 
-            // Send post
+            // Send
             string jsonResponse = await Core.SendPostRequest(_token, "/profile/sshkeys", raw);
 
             // Return
@@ -91,7 +91,7 @@ namespace Linode.Api.Client
             // Preparing raw
             string raw = $"{{ \"label\": \"{sshKey.Label}\" }}";
 
-            // Send post
+            // Send
             string jsonResponse = await Core.SendPutRequest(_token, $"/profile/sshkeys/{sshKey.Id}", raw);
 
             // Return

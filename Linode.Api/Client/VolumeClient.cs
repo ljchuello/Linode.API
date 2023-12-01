@@ -76,7 +76,7 @@ namespace Linode.Api.Client
             // Preparing raw
             string raw = $"{{ \"label\": \"{label}\", \"size\": {size}, \"linode_id\": {linodeId} }}";
 
-            // Send post
+            // Send
             string jsonResponse = await Core.SendPostRequest(_token, "/volumes", raw);
 
             // Return
