@@ -1,6 +1,7 @@
 ﻿using Linode.Api;
 using Linode.Api.Enums;
 using Linode.Api.Objets.Domain;
+using Linode.Api.Objets.RecordDns;
 using Linode.Api.Objets.Volume;
 
 namespace Test
@@ -19,16 +20,10 @@ namespace Test
                 LinodeClient linodeClient = new LinodeClient("apikey");
                 linodeClient = new LinodeClient(await File.ReadAllTextAsync("D:\\Linode.Api.txt"));
 
-                long domainId = 2872671;
+                long domainId = 2873263;
 
-                // Get
-                Domain domain = await linodeClient.Domain.Get(domainId);
-
-                // You can delete it by passing the object as a parameter
-                await linodeClient.Domain.Delete(domain);
-
-                // You can also delete it by passing the ID as a parameter.
-                await linodeClient.Domain.Delete(2872671);
+                // Get one
+                RecordDns recordDns = await linodeClient.RecordDns.CreateIPv4(domainId, $"{Guid.NewGuid()}", "192.168.100.99", 30);
 
             }
             catch (Exception ex)

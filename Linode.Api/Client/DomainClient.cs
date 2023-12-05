@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Linode.Api.Objets.Domain;
 using Linode.Api.Objets.Domain.Get;
+using Linode.Api.Objets.RecordDns;
 using Linode.Api.Objets.Volume;
 
 namespace Linode.Api.Client

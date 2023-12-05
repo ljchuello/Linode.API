@@ -11,6 +11,7 @@ namespace Linode.Api
             Token = token;
 
             Domain = new DomainClient(token);
+            RecordDns = new RecordDnsClient(token);
             Firewall = new FirewallClient(token);
             Image = new ImageClient(token);
             LinodeType = new LinodeTypeClient(token);
@@ -20,6 +21,7 @@ namespace Linode.Api
         }
 
         public DomainClient Domain { get; private set; }
+        public RecordDnsClient RecordDns { get; private set; }
         public FirewallClient Firewall { get; private set; }
         public ImageClient Image { get; private set; }
         public LinodeTypeClient LinodeType { get; private set; }
