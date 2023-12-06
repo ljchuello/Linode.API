@@ -21,9 +21,16 @@ namespace Test
                 linodeClient = new LinodeClient(await File.ReadAllTextAsync("D:\\Linode.Api.txt"));
 
                 long domainId = 2873263;
+                long recordDnsId = 32497006;
 
-                // Get one
-                RecordDns recordDns = await linodeClient.RecordDns.CreateIPv4(domainId, $"{Guid.NewGuid()}", "192.168.100.99", 30);
+                // Get
+                RecordDns recordDns = await linodeClient.RecordDns.Get(domainId, recordDnsId);
+
+                // You can delete it by passing the object as a parameter.
+                await linodeClient.RecordDns.Delete(domainId, recordDns);
+
+                // You can also delete it by passing the ID as a parameter.
+                await linodeClient.RecordDns.Delete(domainId, recordDnsId);
 
             }
             catch (Exception ex)
