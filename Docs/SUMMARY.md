@@ -1,3 +1,9 @@
 # Table of contents
 
-* [Page](README.md)
+## Overview
+
+* [🧮 Implemented functionality](README.md)
+
+## Functions & Methods
+
+* [Page 2](functions-and-methods/page-2.md)
