@@ -2,7 +2,7 @@
 
 ## Overview
 
-* [🧮 Implemented functionality](README.md)
+* [🧮 Implemented functionality xD](README.md)
 
 ## Functions & Methods
 
