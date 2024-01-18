@@ -81,13 +81,10 @@ List<string> authorizedUsers = new List<string> { "LJChuello" };
 
 // List of enabled public SSH keys
 List<string> authorizedKeys = new List<string>();
-for (int i = 1; i <= 10; i++)
-{
-    // We rely on the 'SshKeyGenerator' library to generate SSH credentials.
-    SshKeyGenerator.SshKeyGenerator sshKeyGenerator = new SshKeyGenerator.SshKeyGenerator(2048);
-    // Add to list
-    authorizedKeys.Add(sshKeyGenerator.ToRfcPublicKey($"{Guid.NewGuid()}"));
-}
+// We rely on the 'SshKeyGenerator' library to generate SSH credentials.
+SshKeyGenerator.SshKeyGenerator sshKeyGenerator = new SshKeyGenerator.SshKeyGenerator(2048);
+// Add to list
+authorizedKeys.Add(sshKeyGenerator.ToRfcPublicKey($"{Guid.NewGuid()}"));
 
 // If true, we indicate that backups are made by Linode
 bool backups = true;
@@ -119,4 +116,52 @@ LinodeInstance linodeInstance = await linodeClient.LinodeInstance.Create(
     privateIp: privateIp,
     tags: tags
 );
+```
+
+## Updates a Linode
+
+Updates a Linode that you have permission to `read_write`.
+
+**Important**: You must be an unrestricted User in order to add or modify tags on Linodes.
+
+```csharp
+LinodeClient linodeClient = new LinodeClient("apikey");
+
+// Get
+LinodeInstance linodeInstance = await linodeClient.LinodeInstance.Get(54126156);
+
+// Set label and Tags
+linodeInstance.Label = $"{Guid.NewGuid()}";
+linodeInstance.Tags = new List<string> { "Kevin", "Magnussen", "Haas F1 Team" };
+
+// Update
+linodeInstance = await linodeClient.LinodeInstance.Update(linodeInstance);
+```
+
+## Deletes a Linode
+
+Deletes a Linode you have permission to `read_write`.
+
+**Deleting a Linode is a destructive action and cannot be undone.**
+
+Additionally, deleting a Linode:
+
+* Gives up any IP addresses the Linode was assigned.
+* Deletes all Disks, Backups, Configs, etc.
+* Detaches any Volumes associated with the Linode.
+* Stops billing for the Linode and its associated services. You will be billed for time used within the billing period the Linode was active.
+
+Linodes that are in the process of [cloning](https://www.linode.com/docs/api/linode-instances/#linode-clone) or [backup restoration](https://www.linode.com/docs/api/linode-instances/#backup-restore) cannot be deleted.
+
+```csharp
+LinodeClient linodeClient = new LinodeClient("apikey");
+
+// Get
+LinodeInstance linodeInstance = await linodeClient.LinodeInstance.Get(54126784);
+
+// You can delete it by passing the object as a parameter
+await linodeClient.LinodeInstance.Delete(linodeInstance);
+
+// You can also delete it by passing the ID as a parameter.
+await linodeClient.LinodeInstance.Delete(54126784);
 ```
