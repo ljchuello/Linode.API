@@ -2,7 +2,8 @@
 
 ## Overview
 
-* [🧮 Implemented functionality xD](README.md)
+* [Compatibilidad](README.md)
+* [🧮 Implemented functionality xD](<README (1).md>)
 
 ## Functions & Methods
 
