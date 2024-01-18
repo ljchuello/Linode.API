@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Linode.Api.Objets.LinodeInstance;
 using Linode.Api.Objets.LinodeInstance.Get;
-using Linode.Api.Objets.Volume;
+using System.Linq;
+using Linode.Api.Objets.Domain;
 
 namespace Linode.Api.Client
 {
@@ -16,6 +17,10 @@ namespace Linode.Api.Client
             _token = token;
         }
 
+        /// <summary>
+        /// Returns a paginated list of Linodes you have permission to view.
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<LinodeInstance>> Get()
         {
             List<LinodeInstance> list = new List<LinodeInstance>();
@@ -43,6 +48,11 @@ namespace Linode.Api.Client
             }
         }
 
+        /// <summary>
+        /// Get a specific Linode by ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<LinodeInstance> Get(long id)
         {
             // Get list
@@ -56,7 +66,7 @@ namespace Linode.Api.Client
         }
 
         /// <summary>
-        /// 
+        /// Creates a Linode Instance on your Account
         /// </summary>
         /// <param name="label">The Linode’s label is for display purposes only. If no label is provided for a Linode, a default will be assigned.</param>
         /// <param name="regionId">The Region where the Linode will be located.</param>
@@ -104,6 +114,43 @@ namespace Linode.Api.Client
 
             // Return
             return JsonConvert.DeserializeObject<LinodeInstance>(jsonResponse) ?? new LinodeInstance();
+        }
+
+        /// <summary>
+        /// Updates a Linode
+        /// </summary>
+        /// <param name="linodeInstance"></param>
+        /// <returns></returns>
+        public async Task<LinodeInstance> Update(LinodeInstance linodeInstance)
+        {
+            // json
+            string json = $"{{ \"label\": \"{linodeInstance.Label}\", \"tags\": [ {string.Join(", ", linodeInstance.Tags.Select(tag => $"\"{tag}\""))} ] }}";
+
+            // Send
+            string jsonResponse = await Core.SendPutRequest(_token, $"/linode/instances/{linodeInstance.Id}", json);
+
+            // Return
+            return JsonConvert.DeserializeObject<LinodeInstance>(jsonResponse) ?? new LinodeInstance();
+        }
+
+        /// <summary>
+        /// Deletes a Linode
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task Delete(long id)
+        {
+            await Core.SendDeleteRequest(_token, $"/linode/instances/{id}");
+        }
+
+        /// <summary>
+        /// Deletes a Linode
+        /// </summary>
+        /// <param name="linodeInstance"></param>
+        /// <returns></returns>
+        public async Task Delete(LinodeInstance linodeInstance)
+        {
+            await Delete(linodeInstance.Id);
         }
 
         #region Object Create

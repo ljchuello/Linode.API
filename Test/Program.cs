@@ -29,23 +29,20 @@ namespace Test
                 string linodeTypeId = "g6-nanode-1";
                 string imageId = "linode/debian11";
                 string rootPassword = "krGNsg7oPxWTYS^q*KWL8HkHC2nJRUDjE*wT";
-                
+
                 // Optional
 
                 // List of authorized users
                 List<string> authorizedUsers = new List<string> { "LJChuello" };
-                
+
                 // List of enabled public SSH keys
                 List<string> authorizedKeys = new List<string>();
-                for (int i = 1; i <= 10; i++)
-                {
-                    // We rely on the 'SshKeyGenerator' library to generate SSH credentials.
-                    SshKeyGenerator.SshKeyGenerator sshKeyGenerator = new SshKeyGenerator.SshKeyGenerator(2048);
 
-                    // Add to list
-                    authorizedKeys.Add(sshKeyGenerator.ToRfcPublicKey($"{Guid.NewGuid()}"));
-                    File.WriteAllText("D:\\key.key", sshKeyGenerator.ToPrivateKey());
-                }
+                // We rely on the 'SshKeyGenerator' library to generate SSH credentials.
+                SshKeyGenerator.SshKeyGenerator sshKeyGenerator = new SshKeyGenerator.SshKeyGenerator(2048);
+
+                // Add to list
+                authorizedKeys.Add(sshKeyGenerator.ToRfcPublicKey($"{Guid.NewGuid()}"));
 
                 // If true, we indicate that backups are made by Linode
                 bool backups = true;
@@ -60,8 +57,9 @@ namespace Test
                 bool privateIp = true;
 
                 // If specified, it is a list of tags with which the Linode will be identified
-                List<string> tags = new List<string> { "this", "seper", "server" };
+                List<string> tags = new List<string> { "this", "super", "server" };
 
+                // Create
                 LinodeInstance linodeInstance = await linodeClient.LinodeInstance.Create(
                     label,
                     regionId,
@@ -76,6 +74,7 @@ namespace Test
                     privateIp: privateIp,
                     tags: tags
                 );
+
             }
             catch (Exception ex)
             {
