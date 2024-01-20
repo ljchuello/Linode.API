@@ -165,3 +165,52 @@ await linodeClient.LinodeInstance.Delete(linodeInstance);
 // You can also delete it by passing the ID as a parameter.
 await linodeClient.LinodeInstance.Delete(54126784);
 ```
+
+## JSON
+
+```json
+{
+    "id": 54203595,
+    "label": "debian-eu-central",
+    "group": "",
+    "status": "running",
+    "created": "2024-01-20T18:41:32",
+    "updated": "2024-01-20T18:42:09",
+    "type": "g6-nanode-1",
+    "ipv4": [
+        "172.105.89.206",
+        "192.168.139.240"
+    ],
+    "ipv6": "2a01:7e01::f03c:94ff:febd:d06d/128",
+    "image": "linode/debian11",
+    "region": "eu-central",
+    "specs": {
+        "disk": 25600,
+        "memory": 1024,
+        "vcpus": 1,
+        "gpus": 0,
+        "transfer": 1000
+    },
+    "alerts": {
+        "cpu": 90,
+        "network_in": 10,
+        "network_out": 10,
+        "transfer_quota": 80,
+        "io": 10000
+    },
+    "backups": {
+        "enabled": false,
+        "available": false,
+        "schedule": {
+            "day": null,
+            "window": null
+        },
+        "last_successful": null
+    },
+    "hypervisor": "kvm",
+    "watchdog_enabled": true,
+    "tags": [],
+    "host_uuid": "dbad721e1935a43e409a0fa120d30e42574c3088",
+    "has_user_data": false
+}
+```
