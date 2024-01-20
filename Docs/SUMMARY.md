@@ -3,7 +3,8 @@
 ## Overview
 
 * [Compatibilidad](README.md)
-* [🧮 Implemented functionality xD](<README (1).md>)
+* [🧮 Implemented functionality](overview/implemented-functionality.md)
+* [📚 Changelog](overview/changelog.md)
 
 ## Functions & Methods
 
