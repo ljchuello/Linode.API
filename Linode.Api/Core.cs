@@ -62,77 +62,69 @@ namespace Linode.Api
 
         public static async Task<string> SendPostRequest(string token, string url)
         {
-            HttpResponseMessage httpResponseMessage;
-            using (HttpClient httpClient = new HttpClient())
+            // Set
+            string content = string.Empty;
+            HttpStatusCode httpStatusCode;
+            Root.Error error = new Root.Error();
+
+            // Request
+            using (RestClient restClient = new RestClient(ApiServer))
             {
-                using (HttpRequestMessage httpRequestMessage = new HttpRequestMessage(new HttpMethod("POST"), $"{ApiServer}{url}"))
-                {
-                    httpRequestMessage.Headers.TryAddWithoutValidation("Authorization", $"Bearer {token}");
-                    httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
-                }
+                var request = new RestRequest(url, Method.Post);
+                request.AddHeader("Authorization", $"Bearer {token}");
+                RestResponse response = await restClient.ExecuteAsync(request);
+
+                // Set
+                content = response.Content;
+                httpStatusCode = response.StatusCode;
             }
 
-            // Response
-            string json = await httpResponseMessage.Content.ReadAsStringAsync();
-
-            switch (httpResponseMessage.StatusCode)
+            // Check
+            switch (httpStatusCode)
             {
                 case HttpStatusCode.OK:
-                    break;
+                    return content;
 
                 default:
-                    // Get Error
-                    JObject result = JObject.Parse(json);
-                    //Error error = JsonConvert.DeserializeObject<Error>($"{result["error"]}") ?? new Error();
-
-                    //Check error
-                    //if (error.Message.Contains("with ID") && error.Message.Contains("not found"))
-                    //{
-                    //    // The error is due to the resource not being found. Let's make it return empty instead of an error.
-                    //    json = "{}";
-                    //}
-                    //else
-                    //{
-                    //    // If it's a genuine error
-                    //    throw new Exception($"{error.Code} - {error.Message}");
-                    //}
-                    break;
+                    error = JsonConvert.DeserializeObject<Root.Error>(content) ?? new Root.Error();
+                    throw new Exception($"An error has occurred. Reason: {error.Errors[0].Reason}");
             }
-
-            return json;
         }
 
-        public static async Task<string> SendPostRequest(string token, string url, string content)
+        public static async Task<string> SendPostRequest(string token, string url, string raw)
         {
-            HttpResponseMessage httpResponseMessage;
-            using (HttpClient httpClient = new HttpClient())
+            // Set
+            string content = string.Empty;
+            HttpStatusCode httpStatusCode;
+            Root.Error error = new Root.Error();
+
+            // Request
+            using (RestClient restClient = new RestClient(ApiServer))
             {
-                using (HttpRequestMessage httpRequestMessage = new HttpRequestMessage(new HttpMethod("POST"), $"{ApiServer}{url}"))
-                {
-                    httpRequestMessage.Headers.TryAddWithoutValidation("Authorization", $"Bearer {token}");
-                    httpRequestMessage.Content = new StringContent(content);
-                    httpRequestMessage.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
-                    httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
-                }
+                RestRequest request = new RestRequest(url, Method.Post);
+                request.AddHeader("Authorization", $"Bearer {token}");
+                request.AddJsonBody(raw, "application/json");
+                RestResponse response = await restClient.ExecuteAsync(request);
+
+                // Set
+                content = response.Content;
+                httpStatusCode = response.StatusCode;
             }
 
-            // Response
-            string json = await httpResponseMessage.Content.ReadAsStringAsync();
-
-            switch (httpResponseMessage.StatusCode)
+            // Check
+            switch (httpStatusCode)
             {
-                case HttpStatusCode.Created:
                 case HttpStatusCode.OK:
-                    break;
+                case HttpStatusCode.Created:
+                    return content;
 
                 default:
-                    break;
+                    error = JsonConvert.DeserializeObject<Root.Error>(content) ?? new Root.Error();
+                    throw new Exception($"An error has occurred. Reason: {error.Errors[0].Reason}");
             }
-
-            return json;
         }
 
-        public static async Task<string> SendPutRequest(string token, string url, string content)
+        public static async Task<string> SendPutRequest(string token, string url, string raw)
         {
             HttpResponseMessage httpResponseMessage;
             using (HttpClient httpClient = new HttpClient())
@@ -140,7 +132,7 @@ namespace Linode.Api
                 using (HttpRequestMessage httpRequestMessage = new HttpRequestMessage(new HttpMethod("PUT"), $"{ApiServer}{url}"))
                 {
                     httpRequestMessage.Headers.TryAddWithoutValidation("Authorization", $"Bearer {token}");
-                    httpRequestMessage.Content = new StringContent(content);
+                    httpRequestMessage.Content = new StringContent(raw);
                     httpRequestMessage.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
                     httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
                 }

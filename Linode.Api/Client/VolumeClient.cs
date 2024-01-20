@@ -143,13 +143,10 @@ namespace Linode.Api.Client
         /// </summary>
         /// <param name="volumeId">ID of the Volume to detach.</param>
         /// <returns></returns>
-        public async Task<Volume> Detach(long volumeId)
+        public async Task Detach(long volumeId)
         {
             // Send
-            string jsonResponse = await Core.SendPostRequest(_token, $"/volumes/{volumeId}/detach");
-
-            // Return
-            return JsonConvert.DeserializeObject<Volume>(jsonResponse) ?? new Volume();
+            await Core.SendPostRequest(_token, $"/volumes/{volumeId}/detach");
         }
 
         /// <summary>

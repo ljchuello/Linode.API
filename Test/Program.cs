@@ -23,7 +23,13 @@ namespace Test
                 LinodeClient linodeClient = new LinodeClient("apikey");
                 linodeClient = new LinodeClient(await File.ReadAllTextAsync("D:\\Linode.Api.txt"));
 
-                Firewall firewall = await linodeClient.Firewall.Get(2857258);
+                var list = await linodeClient.Volume.Get();
+
+                Volume volume = list[0];
+
+                volume.Label = $"{Guid.NewGuid()}";
+
+                volume = await linodeClient.Volume.Update(volume);
 
             }
             catch (Exception ex)
