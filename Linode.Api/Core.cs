@@ -126,32 +126,35 @@ namespace Linode.Api
 
         public static async Task<string> SendPutRequest(string token, string url, string raw)
         {
-            HttpResponseMessage httpResponseMessage;
-            using (HttpClient httpClient = new HttpClient())
+            // Set
+            string content = string.Empty;
+            HttpStatusCode httpStatusCode;
+            Root.Error error = new Root.Error();
+
+            // Request
+            using (RestClient restClient = new RestClient(ApiServer))
             {
-                using (HttpRequestMessage httpRequestMessage = new HttpRequestMessage(new HttpMethod("PUT"), $"{ApiServer}{url}"))
-                {
-                    httpRequestMessage.Headers.TryAddWithoutValidation("Authorization", $"Bearer {token}");
-                    httpRequestMessage.Content = new StringContent(raw);
-                    httpRequestMessage.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
-                    httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
-                }
+                RestRequest request = new RestRequest(url, Method.Put);
+                request.AddHeader("Authorization", $"Bearer {token}");
+                request.AddJsonBody(raw, "application/json");
+                RestResponse response = await restClient.ExecuteAsync(request);
+
+                // Set
+                content = response.Content;
+                httpStatusCode = response.StatusCode;
             }
 
-            // Response
-            string json = await httpResponseMessage.Content.ReadAsStringAsync();
-
-            switch (httpResponseMessage.StatusCode)
+            // Check
+            switch (httpStatusCode)
             {
-                case HttpStatusCode.Created:
                 case HttpStatusCode.OK:
-                    break;
+                case HttpStatusCode.Created:
+                    return content;
 
                 default:
-                    break;
+                    error = JsonConvert.DeserializeObject<Root.Error>(content) ?? new Root.Error();
+                    throw new Exception($"An error has occurred. Reason: {error.Errors[0].Reason}");
             }
-
-            return json;
         }
 
         public static async Task SendDeleteRequest(string token, string url)
