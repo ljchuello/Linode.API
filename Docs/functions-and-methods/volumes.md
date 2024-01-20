@@ -101,7 +101,7 @@ LinodeClient linodeClient = new LinodeClient("apikey");
 long volumeId = 2036242;
 
 // Detach
-Volume volume = await linodeClient.Volume.Detach(volumeId);
+await linodeClient.Volume.Detach(volumeId);
 ```
 
 ## Resize
