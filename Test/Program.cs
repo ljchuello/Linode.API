@@ -1,6 +1,7 @@
 ﻿using Linode.Api;
 using Linode.Api.Enums;
 using Linode.Api.Objets.Domain;
+using Linode.Api.Objets.Firewall;
 using Linode.Api.Objets.LinodeInstance;
 using Linode.Api.Objets.RecordDns;
 using Linode.Api.Objets.Volume;
@@ -22,58 +23,7 @@ namespace Test
                 LinodeClient linodeClient = new LinodeClient("apikey");
                 linodeClient = new LinodeClient(await File.ReadAllTextAsync("D:\\Linode.Api.txt"));
 
-                // Required
-
-                string label = "mySuperServerLinode";
-                string regionId = "eu-central";
-                string linodeTypeId = "g6-nanode-1";
-                string imageId = "linode/debian11";
-                string rootPassword = "krGNsg7oPxWTYS^q*KWL8HkHC2nJRUDjE*wT";
-
-                // Optional
-
-                // List of authorized users
-                List<string> authorizedUsers = new List<string> { "LJChuello" };
-
-                // List of enabled public SSH keys
-                List<string> authorizedKeys = new List<string>();
-
-                // We rely on the 'SshKeyGenerator' library to generate SSH credentials.
-                SshKeyGenerator.SshKeyGenerator sshKeyGenerator = new SshKeyGenerator.SshKeyGenerator(2048);
-
-                // Add to list
-                authorizedKeys.Add(sshKeyGenerator.ToRfcPublicKey($"{Guid.NewGuid()}"));
-
-                // If true, we indicate that backups are made by Linode
-                bool backups = true;
-
-                // If indicated, sets the firewall ID of the firewall that was specified
-                long firewallId = 285728;
-
-                // If StackScripts is set, the server executes the Stack Scripts of the specified ID
-                long stackscriptId = 1278172;
-
-                // If Private Ip is true, it enables the private IP address on the Linode
-                bool privateIp = true;
-
-                // If specified, it is a list of tags with which the Linode will be identified
-                List<string> tags = new List<string> { "this", "super", "server" };
-
-                // Create
-                LinodeInstance linodeInstance = await linodeClient.LinodeInstance.Create(
-                    label,
-                    regionId,
-                    linodeTypeId,
-                    imageId,
-                    rootPassword,
-                    authorizedUsers: authorizedUsers,
-                    authorizedKeys: authorizedKeys,
-                    backups: backups,
-                    firewallId: firewallId,
-                    stackscriptId: stackscriptId,
-                    privateIp: privateIp,
-                    tags: tags
-                );
+                Firewall firewall = await linodeClient.Firewall.Get(2857258);
 
             }
             catch (Exception ex)
