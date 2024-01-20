@@ -27,9 +27,7 @@ namespace Test
 
                 Volume volume = list[0];
 
-                volume.Label = $"abc123";
-
-                volume = await linodeClient.Volume.Update(volume);
+               await linodeClient.Volume.Delete(volume.Id);
 
             }
             catch (Exception ex)

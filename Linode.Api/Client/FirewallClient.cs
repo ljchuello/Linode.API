@@ -2,10 +2,8 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Linode.Api.Enums;
 using Linode.Api.Objets.Firewall;
 using Linode.Api.Objets.FirewallDevice;
-using Linode.Api.Objets.SshKey;
 
 namespace Linode.Api.Client
 {
