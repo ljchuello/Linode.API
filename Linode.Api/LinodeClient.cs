@@ -18,6 +18,7 @@ namespace Linode.Api
             LinodeType = new LinodeTypeClient(token);
             Region = new RegionClient(token);
             SshKey = new SshKeyClient(token);
+            StackScript = new StackScriptClient(token);
             Volume = new VolumeClient(token);
         }
 
@@ -29,6 +30,7 @@ namespace Linode.Api
         public LinodeTypeClient LinodeType { get; private set; }
         public RegionClient Region { get; private set; }
         public SshKeyClient SshKey { get; private set; }
+        public StackScriptClient StackScript { get; private set; }
         public VolumeClient Volume { get; private set; }
     }
 }

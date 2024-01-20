@@ -4,6 +4,7 @@ using Linode.Api.Objets.Domain;
 using Linode.Api.Objets.Firewall;
 using Linode.Api.Objets.LinodeInstance;
 using Linode.Api.Objets.RecordDns;
+using Linode.Api.Objets.StackScript;
 using Linode.Api.Objets.Volume;
 using Newtonsoft.Json;
 
@@ -23,11 +24,7 @@ namespace Test
                 LinodeClient linodeClient = new LinodeClient("apikey");
                 linodeClient = new LinodeClient(await File.ReadAllTextAsync("D:\\Linode.Api.txt"));
 
-                var list = await linodeClient.Volume.Get();
-
-                Volume volume = list[0];
-
-               await linodeClient.Volume.Delete(volume.Id);
+                StackScript stackScript = await linodeClient.StackScript.Get(1278172);
 
             }
             catch (Exception ex)
