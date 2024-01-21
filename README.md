@@ -1,8 +1,3 @@
-![GitHub ssues](https://img.shields.io/github/issues/ljchuello/Linode.API)
-![GitHub License](https://img.shields.io/github/license/ljchuello/Linode.API)
-
-
-<br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
     <img src="https://raw.githubusercontent.com/ljchuello/Linode.API/master/icon_128.png" alt="Logo" width="80" height="80">
