@@ -1,8 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
-using System.Net.Http;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
-using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System;
 using RestSharp;

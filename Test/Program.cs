@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using Linode.Api;
+﻿using Linode.Api;
 using Linode.Api.Objets.StackScript;
 
 namespace Test
