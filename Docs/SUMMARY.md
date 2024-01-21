@@ -17,4 +17,5 @@
 * [🗄️ Linode Types](functions-and-methods/linode-types.md)
 * [🌎 Regions](functions-and-methods/regions.md)
 * [🔐 SSH Keys](functions-and-methods/ssh-keys.md)
+* [📜 StackScript](functions-and-methods/stackscript.md)
 * [📦 Volumes](functions-and-methods/volumes.md)
