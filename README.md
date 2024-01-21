@@ -1,7 +1,5 @@
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://raw.githubusercontent.com/ljchuello/Linode.API/master/icon_128.png" alt="Logo" width="80" height="80">
-  </a>
+  <img src="https://raw.githubusercontent.com/ljchuello/Linode.API/master/icon_128.png" alt="Logo" width="128">
 
   <h3 align="center">Welcome to Linode.API</h3>
 
@@ -13,9 +11,9 @@
     <br />
     <a href="https://ljchuello.gitbook.io/linode.api/functions-and-methods/linode-instance">View Demo</a>
     ·
-    <a href="https://github.com/ljchuello/Linode.API/issues/new">Report Bug</a>
+    <a href="https://github.com/ljchuello/Linode.API/issues/">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/ljchuello/Linode.API/issues/">Request Feature</a>
   </p>
 </div>
 
