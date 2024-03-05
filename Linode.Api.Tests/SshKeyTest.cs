@@ -45,5 +45,48 @@ namespace Linode.Api.Tests
             // Assert
             Assert.True(sshKey.Id > 0);
         }
+
+        [Fact]
+        public async Task UpdateTest()
+        {
+            // Arrange
+            List<SshKey> list = await _linodeClient.SshKey.Get();
+            SshKey sshKey = list[0];
+
+            // Act
+            sshKey.Label = $"new-label-{Guid.NewGuid()}";
+            sshKey = await _linodeClient.SshKey.Update(sshKey);
+
+            // Assert
+            Assert.True(sshKey.Id > 0);
+        }
+
+        [Fact]
+        public async Task DeleteObjTest()
+        {
+            // Arrange
+            List<SshKey> list = await _linodeClient.SshKey.Get();
+            SshKey sshKey = list[0];
+
+            // Act
+            await _linodeClient.SshKey.Delete(sshKey);
+
+            // Assert
+            Assert.True(true);
+        }
+
+        [Fact]
+        public async Task DeleteIdTest()
+        {
+            // Arrange
+            List<SshKey> list = await _linodeClient.SshKey.Get();
+            SshKey sshKey = list[0];
+
+            // Act
+            await _linodeClient.SshKey.Delete(sshKey.Id);
+
+            // Assert
+            Assert.True(true);
+        }
     }
 }
