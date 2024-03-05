@@ -2,7 +2,7 @@ using Linode.Api.Objets.SshKey;
 
 namespace Linode.Api.Tests
 {
-    public class SshKeyTest
+    public class SshKeyClientTest
     {
         private readonly LinodeClient _linodeClient = new LinodeClient(File.ReadAllText("D:\\Linode.Api.txt"));
 
