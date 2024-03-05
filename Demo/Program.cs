@@ -1,7 +1,7 @@
 ﻿using Linode.Api;
 using Linode.Api.Objets.StackScript;
 
-namespace Test
+namespace Demo
 {
     internal class Program
     {
