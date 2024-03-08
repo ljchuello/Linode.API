@@ -35,11 +35,67 @@ This project is essentially your comprehensive guide to explore and use Linode A
 
 ### Installation
 
+Before you can use Linode.API in your application, you must add the NuGet package. You can do this using your IDE or the command line:
+
+`PM> dotnet add package Linode.API`
+
 ## Usage
+
+Ex; Create a server
+
+```csharp
+
+LinodeClient linodeClient = new LinodeClient("apikey");
+
+string label = "mySuperServerLinode";
+string regionId = "eu-central";
+string linodeTypeId = "g6-nanode-1";
+string imageId = "linode/debian11";
+string rootPassword = "krGNsg7oPxWTYS^q*KWL8HkHC2nJRUDjE*wT";
+
+// Create
+LinodeInstance linodeInstance = await linodeClient.LinodeInstance.Create(
+    label,
+    regionId,
+    linodeTypeId,
+    imageId,
+    rootPassword
+);
+```
+
+Ex; Get all server
+
+```csharp
+LinodeClient linodeClient = new LinodeClient("apikey");
+
+// Get all
+List<LinodeInstance> list = await linodeClient.LinodeInstance.Get();
+```
+
+Ex; Get a server
+
+```csharp
+LinodeClient linodeClient = new LinodeClient("apikey");
+
+long instanceId = 52767381;
+
+// Get One
+LinodeInstance linodeInstance = await linodeClient.LinodeInstance.Get(instanceId);
+```
 
 ## License
 
+Distributed under the MIT License. See `LICENSE` for more information.
+
 ## Contact
+
+Leonardo Chuello - [@LJChuello](https://twitter.com/LJChuello) - ljchuello@gmail.com
+
+Project Link: [github.com/ljchuello/Linode.API](https://github.com/ljchuello/Linode.API)
+
+Project Documentation: [ljchuello.gitbook.io/linode.api/](https://ljchuello.gitbook.io/linode.api/)
+
+Nuget Package [nuget.org/packages/Linode.API](https://www.nuget.org/packages/Linode.API)
 
 ## Implemented functionality
 
@@ -61,4 +117,4 @@ This project is essentially your comprehensive guide to explore and use Linode A
 | VLANs | :heavy_minus_sign: | :heavy_minus_sign: | :heavy_minus_sign: | :heavy_minus_sign: | :heavy_minus_sign: | :heavy_minus_sign: |
 | Volumes | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 
-To have the complete list of the functionalities implemented in this library [consult the Wiki](https://github.com/ljchuello/Linode.API/wiki)
+To have the complete list of the functionalities implemented in this library [consult the Wiki](https://ljchuello.gitbook.io/linode.api/)
