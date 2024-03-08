@@ -2,9 +2,7 @@
 
 ## Overview
 
-* [Compatibilidad](README.md)
-* [🧮 Implemented functionality](overview/implemented-functionality.md)
-* [📚 Changelog](overview/changelog.md)
+* [👋🏻 Welcome to Linode.API](README.md)
 
 ## Functions & Methods
 
