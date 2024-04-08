@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using RestSharp;
 using Linode.Api.Objets.Error;
+using System.Reflection;
 
 namespace Linode.Api
 {
@@ -184,6 +185,45 @@ namespace Linode.Api
                     error = JsonConvert.DeserializeObject<Root.Error>(content) ?? new Root.Error();
                     throw new Exception($"An error has occurred. Reason: {error.Errors[0].Reason}");
             }
+        }
+
+        public static object SetEmptyStringsToNull(object obj)
+        {
+            // Creamos una instancia nueva del mismo tipo de objeto
+            object newObj = Activator.CreateInstance(obj.GetType());
+
+            // Obtenemos todas las propiedades del objeto original
+            PropertyInfo[] properties = obj.GetType().GetProperties();
+
+            // Recorremos cada propiedad
+            foreach (PropertyInfo property in properties)
+            {
+                // Verificamos si la propiedad es de tipo string
+                if (property.PropertyType == typeof(string))
+                {
+                    // Obtenemos el valor de la propiedad del objeto original
+                    string value = (string)property.GetValue(obj);
+
+                    // Si el valor es una cadena vacía, lo seteamos a null en la nueva instancia
+                    if (string.IsNullOrEmpty(value))
+                    {
+                        property.SetValue(newObj, null);
+                    }
+                    else
+                    {
+                        // Si no es una cadena vacía, copiamos el valor a la nueva instancia
+                        property.SetValue(newObj, value);
+                    }
+                }
+                else
+                {
+                    // Si no es una propiedad de tipo string, copiamos el valor a la nueva instancia
+                    property.SetValue(newObj, property.GetValue(obj));
+                }
+            }
+
+            // Retornamos la nueva instancia con las cadenas vacías convertidas a null
+            return newObj;
         }
     }
 }

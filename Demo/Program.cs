@@ -1,5 +1,6 @@
 ﻿using Linode.Api;
-using Linode.Api.Objets.StackScript;
+using Linode.Api.Objets.Domain;
+using Linode.Api.Objets.RecordDns;
 
 namespace Demo
 {
@@ -17,20 +18,17 @@ namespace Demo
                 LinodeClient linodeClient = new LinodeClient("apikey");
                 linodeClient = new LinodeClient(await File.ReadAllTextAsync("D:\\Linode.Api.txt"));
 
-                // Get 
-                StackScript stackScript = await linodeClient.StackScript.Get(1300720);
+                // Get domain
+                Domain domain = await linodeClient.Domain.Get(2948568);
 
-                // Rename label
-                stackScript.Label = "How to be an F1 driver for dummies (By; Valtteri Bottas)";
+                // Get record DNS
+                RecordDns recordDns = await linodeClient.RecordDns.Get(domain.Id, 34430418);
 
-                // Set images, We add Ubuntu images
-                stackScript.Images.Add("linode/ubuntu18.04");
-                stackScript.Images.Add("linode/ubuntu20.04");
-                stackScript.Images.Add("linode/ubuntu22.04");
+                // Set change
+                recordDns.Target = "192.168.100.15";
 
                 // Update
-                stackScript = await linodeClient.StackScript.Update(stackScript);
-
+                recordDns = await linodeClient.RecordDns.Update(2948568, recordDns);
             }
             catch (Exception ex)
             {

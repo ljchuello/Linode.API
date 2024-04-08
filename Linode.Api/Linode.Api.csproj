@@ -6,7 +6,7 @@
 
 		<PackageId>Linode.API</PackageId>
 		<Title>Linode.API</Title>
-		<Version>0.0.3</Version>
+		<Version>0.1.4</Version>
 		<Authors>ljchuello</Authors>
 		<Description>This C# / .NET Core SDK simplifies using Linode Cloud API, managing servers, firewalls, SSH keys, and volumes. Ideal for web developers and .NET apps, it boosts cloud management for Linode Cloud resources.</Description>
 		<PackageProjectUrl>https://www.nuget.org/packages/Linode.API</PackageProjectUrl>

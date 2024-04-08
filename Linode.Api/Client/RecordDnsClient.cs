@@ -274,6 +274,19 @@ namespace Linode.Api.Client
             return JsonConvert.DeserializeObject<RecordDns>(jsonResponse) ?? new RecordDns();
         }
 
+        public async Task<RecordDns> Update(long domainId, RecordDns recordDns)
+        {
+            // Preparing raw
+            recordDns = (RecordDns)Core.SetEmptyStringsToNull(recordDns);
+            string raw = JsonConvert.SerializeObject(recordDns, Formatting.Indented);
+
+            // Send
+            string jsonResponse = await Core.SendPutRequest(_token, $"/domains/{domainId}/records/{recordDns.Id}", raw);
+
+            // Return
+            return JsonConvert.DeserializeObject<RecordDns>(jsonResponse) ?? new RecordDns();
+        }
+
         /// <summary>
         /// Deletes a Record on this Domain.
         /// </summary>
