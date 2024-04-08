@@ -120,13 +120,32 @@ long ttl = 30;
 RecordDns recordDns = await linodeClient.RecordDns.CreateCAA(domainId, name, tag, content, ttl);
 ```
 
-## Delete DNS Record
+## Update DNS Record
 
-Deletes a Record on this Domain.
+Updates a single Record on this Domain.
 
 ```csharp
 LinodeClient linodeClient = new LinodeClient("apikey");
 
+long domainId = 2873263;
+long recordDnsId = 32497006;
+
+// Get
+RecordDns recordDns = await linodeClient.RecordDns.Get(domainId, recordDnsId);
+
+// Change
+recordDns.Target = "192.168.100.15";
+
+// Update
+recordDns = await linodeClient.RecordDns.Update(2948568, recordDns);
+```
+
+## Delete DNS Record
+
+Deletes a Record on this Domain.
+
+<pre class="language-csharp"><code class="lang-csharp"><strong>LinodeClient linodeClient = new LinodeClient("apikey");
+</strong>
 long domainId = 2873263;
 long recordDnsId = 32497006;
 
@@ -138,4 +157,4 @@ await linodeClient.RecordDns.Delete(domainId, recordDns);
 
 // You can also delete it by passing the ID as a parameter.
 await linodeClient.RecordDns.Delete(domainId, recordDnsId);
-```
+</code></pre>
