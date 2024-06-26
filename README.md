@@ -6,10 +6,10 @@
   <p align="center">
     An awesome README template to jumpstart your projects!
     <br />
-    <a href="https://ljchuello.gitbook.io/linode.api/"><strong>Explore the docs »</strong></a>
+    <a href="https://linode.ljchuello.com/"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://ljchuello.gitbook.io/linode.api/functions-and-methods/linode-instance">View Demo</a>
+    <a href="https://linode.ljchuello.com/functions-and-methods/linode-instance">View Demo</a>
     ·
     <a href="https://github.com/ljchuello/Linode.API/issues/">Report Bug</a>
     ·
@@ -93,7 +93,7 @@ Leonardo Chuello - [@LJChuello](https://twitter.com/LJChuello) - ljchuello@gmail
 
 Project Link: [github.com/ljchuello/Linode.API](https://github.com/ljchuello/Linode.API)
 
-Project Documentation: [ljchuello.gitbook.io/linode.api/](https://ljchuello.gitbook.io/linode.api/)
+Project Documentation: [linode.ljchuello.com/](https://linode.ljchuello.com/)
 
 Nuget Package [nuget.org/packages/Linode.API](https://www.nuget.org/packages/Linode.API)
 
