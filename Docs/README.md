@@ -71,7 +71,7 @@ Leonardo Chuello - [@LJChuello](https://twitter.com/LJChuello) - [ljchuello@gmai
 
 Project Link: [github.com/ljchuello/Linode.API](https://github.com/ljchuello/Linode.API)
 
-Project Documentation: [ljchuello.gitbook.io/linode.api/](https://ljchuello.gitbook.io/linode.api/)
+Project Documentation: [linode.ljchuello.com](https://linode.ljchuello.com/)
 
 Nuget Package [nuget.org/packages/Linode.API](https://www.nuget.org/packages/Linode.API)
 
